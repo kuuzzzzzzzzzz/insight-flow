@@ -1,0 +1,6 @@
+﻿{
+  "video_growth_metrics": {
+    "description": "短视频增长分析主表，按视频与日期粒度存储。",
+    "key_fields": ["date", "video_id", "video_title", "content_category"]
+  }
+}
