@@ -378,7 +378,7 @@ InsightFlow 当前将内容增长分析拆成四个视角：
 ![首页与 Agent 协作流程](docs/screenshots/agent-flow.png)
 
     Agent流程运行中
-![动态AGENT协作流程图](docs\screenshots\xietong.png)
+![动态 Agent 协作流程图](docs/screenshots/xietong.png)
 
 ### B站数据分析结果
 
@@ -411,7 +411,7 @@ InsightFlow 当前将内容增长分析拆成四个视角：
 增长漏斗分析
 ![增长漏斗分析](docs/screenshots/1778957503774.png)
 
-![多图表分析](docs/screenshots/charts.png)
+
 
 ### 中文分析数据结论（由InsightAgent生成）
 
@@ -419,7 +419,7 @@ InsightFlow 当前将内容增长分析拆成四个视角：
 
 ### SQL 查询展示（由SQLAgent生成，SQLGuard模块安全校验）
 
-![SQL 查询展示](1778957972283.png)
+![SQL 查询展示](docs/screenshots/1778957972283.png)
 
 ---
 
