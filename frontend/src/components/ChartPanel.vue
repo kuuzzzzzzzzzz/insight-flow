@@ -36,27 +36,60 @@ function displayName(name) {
   return metricNameMap[name] || name
 }
 
-const rateMetricKeys = new Set([
-  'play_rate',
-  'valid_view_rate',
-  'completion_rate',
-  'engagement_user_rate',
-  'profile_visit_rate',
-  'follow_conversion_rate',
-  'next_day_retention_rate',
-  'new_user_ratio',
-])
+function isRateLikeMetric(name) {
+  const n = String(name || '').toLowerCase()
+  return (
+    n.includes('rate') ||
+    n.includes('ratio') ||
+    n.includes('retention') ||
+    n.includes('conversion') ||
+    n.includes('率') ||
+    n.includes('占比') ||
+    n.includes('留存') ||
+    n.includes('转化')
+  )
+}
 
-function isRateMetric(name) {
-  return rateMetricKeys.has(name)
+function isGrowthScoreMetric(name) {
+  const n = String(name || '').toLowerCase()
+  return n.includes('growth_score') || n.includes('综合增长得分')
+}
+
+function isCountLikeMetric(name) {
+  const n = String(name || '').toLowerCase()
+  return (
+    n.includes('count') ||
+    n.includes('views') ||
+    n.includes('播放量') ||
+    n.includes('点赞数') ||
+    n.includes('收藏数') ||
+    n.includes('评论数') ||
+    n.includes('分享数') ||
+    n.includes('弹幕数') ||
+    n.includes('用户数') ||
+    n.includes('访问数')
+  )
 }
 
 function formatValueByMetric(metricName, value) {
-  const num = Number(value ?? 0)
-  if (isRateMetric(metricName) && num >= 0 && num <= 1) {
+  const num = Number(value)
+  if (!Number.isFinite(num)) return String(value ?? '')
+
+  if (isGrowthScoreMetric(metricName)) {
+    return num.toFixed(4)
+  }
+
+  if (isRateLikeMetric(metricName) && num >= 0 && num <= 1) {
     return `${(num * 100).toFixed(2)}%`
   }
-  return Number.isFinite(num) ? Math.round(num).toLocaleString() : String(value ?? '')
+
+  if (isCountLikeMetric(metricName)) {
+    return Math.round(num).toLocaleString()
+  }
+
+  if (Math.abs(num) >= 1000) return Math.round(num).toLocaleString()
+  if (Number.isInteger(num)) return num.toLocaleString()
+  return num.toFixed(4).replace(/\.?0+$/, '')
 }
 
 function truncateLabel(label) {
